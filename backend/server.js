@@ -15,9 +15,11 @@ connectDB();
 // Routes
 const gradeRoutes = require('./routes/grades');
 const analyticsRoutes = require('./routes/analytics');
+const submissionRoutes = require('./routes/submissions');
 
 app.use('/api', gradeRoutes);
 app.use('/api', analyticsRoutes);
+app.use('/api', submissionRoutes);
 
 // Test route
 app.get('/', (req, res) => {
