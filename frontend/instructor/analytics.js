@@ -1,57 +1,37 @@
-let selectedId = null;
+let chartInstance = null;
 
-// Load everything
-async function loadAllData() {
-  await fetchAssignments();
-  await fetchAnalytics(); // from analytics.js
-}
-
-// Fetch assignments
-async function fetchAssignments() {
+async function fetchAnalytics() {
   const studentId = document.getElementById("studentId").value;
 
-  const res = await fetch(`http://localhost:5000/submissions/${studentId}`);
+  const res = await fetch(`http://localhost:3000/api/analytics/${studentId}`);
   const data = await res.json();
 
-  const table = document.getElementById("tableBody");
-  table.innerHTML = "";
+  // Update cards
+  document.getElementById("avgScore").innerText = data.average || 0;
+  document.getElementById("totalAssign").innerText = data.total || 0;
 
-  data.forEach(item => {
-    table.innerHTML += `
-      <tr>
-        <td>${item.title || item.assignmentTitle}</td>
-        <td>${item.date ? new Date(item.date).toLocaleDateString() : "N/A"}</td>
-        <td>
-          <button onclick="select('${item._id}')">Evaluate</button>
-        </td>
-      </tr>
-    `;
-  });
-}
+  // Chart data (safe fallback)
+  const scores = data.scores || [50, 60, 70]; 
 
-// Select assignment
-function select(id) {
-  selectedId = id;
-  alert("Assignment selected");
-}
+  const ctx = document.getElementById('chart').getContext('2d');
 
-// Submit evaluation
-async function submitEvaluation() {
-  const marks = document.getElementById("marks").value;
-  const feedback = document.getElementById("feedback").value;
-
-  if (!selectedId) {
-    alert("Select assignment first");
-    return;
+  if (chartInstance) {
+    chartInstance.destroy();
   }
 
-  await fetch(`http://localhost:5000/grade/${selectedId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: scores.map((_, i) => `A${i+1}`),
+      datasets: [{
+        label: 'Performance',
+        data: scores,
+        borderWidth: 2,
+        tension: 0.3
+      }]
     },
-    body: JSON.stringify({ marks, feedback })
+    options: {
+      responsive: true
+    }
   });
-
-  alert("Evaluation submitted!");
 }
