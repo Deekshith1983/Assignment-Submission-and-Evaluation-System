@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Instructor Dashboard</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f1f5f9;
+    }
+
+    .navbar {
+      background: #0f172a;
+      color: white;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .analytics-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      flex: 1;
+      background: #eff6ff;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">Instructor Dashboard</div>
+
+<div class="container">
+
+  <!-- Student Input -->
+  <div class="card">
+    <h3>Fetch Student Data</h3>
+    <input type="text" id="studentId" placeholder="Enter Student ID">
+    <button onclick="loadAllData()">Fetch Data</button>
+  </div>
+
+  <!-- Assignments -->
+  <div class="card">
+    <h3>Assignments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Evaluation -->
+  <div class="card">
+    <h3>Evaluate Assignment</h3>
+    <input type="number" id="marks" placeholder="Marks (0-100)">
+    <textarea id="feedback" placeholder="Feedback"></textarea>
+    <button onclick="submitEvaluation()">Submit</button>
+  </div>
+
+  <!-- Analytics -->
+  <div class="card">
+    <h3>Analytics</h3>
+
+    <div class="analytics-grid">
+      <div class="stat-box">
+        <h4>Average Score</h4>
+        <p id="avgScore">0</p>
+      </div>
+
+      <div class="stat-box">
+        <h4>Total Assignments</h4>
+        <p id="totalAssign">0</p>
+      </div>
+    </div>
+
+    <canvas id="chart"></canvas>
+  </div>
+
+</div>
+
+<script src="evaluate.js"></script>
+<script src="analytics.js"></script>
+
+</body>
+</html>
