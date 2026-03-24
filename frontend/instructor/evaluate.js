@@ -10,7 +10,7 @@ async function loadAllData() {
 async function fetchAssignments() {
   const studentId = document.getElementById("studentId").value;
 
-  const res = await fetch(`http://localhost:5000/submissions/${studentId}`);
+  const res = await fetch(`http://localhost:3000/api/submissions/${studentId}`);
   const data = await res.json();
 
   const table = document.getElementById("tableBody");
@@ -45,7 +45,7 @@ async function submitEvaluation() {
     return;
   }
 
-  await fetch(`http://localhost:5000/grade/${selectedId}`, {
+  await fetch(`http://localhost:3000/api/grade/${selectedId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
