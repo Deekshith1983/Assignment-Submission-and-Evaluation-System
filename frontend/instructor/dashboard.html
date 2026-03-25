@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <title>Instructor Dashboard</title>
 
@@ -35,10 +36,11 @@
       padding: 20px;
       margin-bottom: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
@@ -62,7 +64,8 @@
       margin-top: 10px;
     }
 
-    th, td {
+    th,
+    td {
       padding: 12px;
       border-bottom: 1px solid #ddd;
       text-align: center;
@@ -90,63 +93,64 @@
 
 <body>
 
-<div class="navbar">Instructor Dashboard</div>
+  <div class="navbar">Instructor Dashboard</div>
 
-<div class="container">
+  <div class="container">
 
-  <!-- Student Input -->
-  <div class="card">
-    <h3>Fetch Student Data</h3>
-    <input type="text" id="studentId" placeholder="Enter Student ID">
-    <button onclick="loadAllData()">Fetch Data</button>
-  </div>
-
-  <!-- Assignments -->
-  <div class="card">
-    <h3>Assignments</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
-
-  <!-- Evaluation -->
-  <div class="card">
-    <h3>Evaluate Assignment</h3>
-    <input type="number" id="marks" placeholder="Marks (0-100)">
-    <textarea id="feedback" placeholder="Feedback"></textarea>
-    <button onclick="submitEvaluation()">Submit</button>
-  </div>
-
-  <!-- Analytics -->
-  <div class="card">
-    <h3>Analytics</h3>
-
-    <div class="analytics-grid">
-      <div class="stat-box">
-        <h4>Average Score</h4>
-        <p id="avgScore">0</p>
-      </div>
-
-      <div class="stat-box">
-        <h4>Total Assignments</h4>
-        <p id="totalAssign">0</p>
-      </div>
+    <!-- Student Input -->
+    <div class="card">
+      <h3>Fetch Student Data</h3>
+      <input type="text" id="studentId" placeholder="Enter Student ID">
+      <button onclick="loadAllData()">Fetch Data</button>
     </div>
 
-    <canvas id="chart"></canvas>
+    <!-- Assignments -->
+    <div class="card">
+      <h3>Assignments</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Evaluation -->
+    <div class="card">
+      <h3>Evaluate Assignment</h3>
+      <input type="number" id="marks" placeholder="Marks (0-100)">
+      <textarea id="feedback" placeholder="Feedback"></textarea>
+      <button onclick="submitEvaluation()">Submit</button>
+    </div>
+
+    <!-- Analytics -->
+    <div class="card">
+      <h3>Analytics</h3>
+
+      <div class="analytics-grid">
+        <div class="stat-box">
+          <h4>Average Score</h4>
+          <p id="avgScore">0</p>
+        </div>
+
+        <div class="stat-box">
+          <h4>Total Assignments</h4>
+          <p id="totalAssign">0</p>
+        </div>
+      </div>
+
+      <canvas id="chart"></canvas>
+    </div>
+
   </div>
 
-</div>
-
-<script src="evaluate.js"></script>
-<script src="analytics.js"></script>
+  <script src="evaluate.js"></script>
+  <script src="analytics.js"></script>
 
 </body>
+
 </html>
