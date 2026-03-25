@@ -1,37 +1,45 @@
-let chartInstance = null;
+let chart;
 
 async function fetchAnalytics() {
-  const studentId = document.getElementById("studentId").value;
+  const id = document.getElementById("studentId").value;
 
-  const res = await fetch(`http://localhost:3000/api/analytics/${studentId}`);
+  const res = await fetch(`http://localhost:3000/api/analytics/${id}`);
   const data = await res.json();
 
-  // Update cards
-  document.getElementById("avgScore").innerText = data.average || 0;
-  document.getElementById("totalAssign").innerText = data.total || 0;
+  document.getElementById("avg").innerText = data.average || 0;
 
-  // Chart data (safe fallback)
-  const scores = data.scores || [50, 60, 70]; 
+  // TABLE FIX
+  const table = document.querySelector("#resultTable tbody");
+  table.innerHTML = "";
 
-  const ctx = document.getElementById('chart').getContext('2d');
+  const results = data.results || [];
 
-  if (chartInstance) {
-    chartInstance.destroy();
-  }
+  results.forEach(item => {
+    table.innerHTML += `
+      <tr>
+        <td>${item.assignmentTitle}</td>
+        <td>${item.marks ?? "Not graded"}</td>
+        <td>${item.feedback}</td>
+      </tr>
+    `;
+  });
 
-  chartInstance = new Chart(ctx, {
+  // CHART
+  const scores = results.map(r => r.marks || 0);
+
+  const ctx = document.getElementById("chart");
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: scores.map((_, i) => `A${i+1}`),
       datasets: [{
-        label: 'Performance',
+        label: "Performance",
         data: scores,
-        borderWidth: 2,
-        tension: 0.3
+        borderWidth: 2
       }]
-    },
-    options: {
-      responsive: true
     }
   });
 }
