@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Evaluate Assignment</title>
+  <style>
+    body { margin:0; font-family:'Segoe UI'; background:#f1f5f9; }
+
+    .navbar { background:#0f172a; color:white; padding:15px; }
+
+    .container { display:flex; gap:20px; padding:20px; }
+
+    .left, .right {
+      width:50%;
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    input, textarea {
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+      border-radius:6px;
+      border:1px solid #ccc;
+    }
+
+    button {
+      margin-top:10px;
+      padding:10px;
+      background:#2563eb;
+      color:white;
+      border:none;
+      border-radius:6px;
+    }
+
+    footer {
+      text-align:center;
+      padding:15px;
+      background:#0f172a;
+      color:white;
+      margin-top:40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">Evaluate Assignment</div>
+
+<div class="container">
+
+  <div class="left">
+    <h3>Student Details</h3>
+    <p>Name: Student</p>
+    <p>Student ID: ---</p>
+    <p>Assignment Title: ---</p>
+
+    <h3>Evaluation</h3>
+    <input type="number" id="marks" placeholder="Marks">
+    <textarea id="feedback" placeholder="Feedback"></textarea>
+    <button onclick="submitEvaluation()">Submit Evaluation</button>
+  </div>
+
+  <div class="right">
+    <h3>File Preview</h3>
+    <p>Download/View Assignment</p>
+  </div>
+
+</div>
+
+<footer>© 2026 Assignment Evaluation System</footer>
+
+<script src="evaluate.js"></script>
+
+</body>
+</html>
