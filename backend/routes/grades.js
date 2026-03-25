@@ -5,20 +5,58 @@ const Grade = require('../models/Grade');
 const Submission = require('../models/Submission');
 
 
-// 🔹 POST /api/grade/:submissionId
+// ============================================
+// ✅ 1. GET submissions for grading (NEW API)
+// ============================================
+router.get('/grade/submissions/:studentId', async (req, res) => {
+  try {
+    const { studentId } = req.params;
+
+    const submissions = await Submission.find({ studentId });
+
+    if (!submissions.length) {
+      return res.status(404).json({
+        message: "No submissions found for this student"
+      });
+    }
+
+    // Send only useful info for instructor
+    const formatted = submissions.map(sub => ({
+      submissionId: sub._id,
+      assignmentTitle: sub.assignmentTitle,
+      status: sub.status,
+      uploadedAt: sub.uploadedAt
+    }));
+
+    res.status(200).json({
+      count: formatted.length,
+      submissions: formatted
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      error: err.message
+    });
+  }
+});
+
+
+// ============================================
+// ✅ 2. POST grade using submissionId
+// ============================================
 router.post('/grade/:submissionId', async (req, res) => {
   try {
     const { submissionId } = req.params;
     const { marks, feedback } = req.body;
 
-    // ✅ Validate input
+    // 🔹 Validate input
     if (marks === undefined || feedback === undefined) {
       return res.status(400).json({
         message: "Marks and feedback are required"
       });
     }
 
-    // ✅ Find submission
+    // 🔹 Find submission
     const submission = await Submission.findById(submissionId);
 
     if (!submission) {
@@ -27,7 +65,7 @@ router.post('/grade/:submissionId', async (req, res) => {
       });
     }
 
-    // ✅ Prevent duplicate grading
+    // 🔹 Prevent duplicate grading
     const existing = await Grade.findOne({ submissionId });
     if (existing) {
       return res.status(400).json({
@@ -35,7 +73,7 @@ router.post('/grade/:submissionId', async (req, res) => {
       });
     }
 
-    // ✅ Save grade
+    // 🔹 Save grade
     const grade = new Grade({
       submissionId,
       studentId: submission.studentId,
@@ -45,13 +83,17 @@ router.post('/grade/:submissionId', async (req, res) => {
 
     await grade.save();
 
-    // ✅ Update submission status
+    // 🔹 Update submission status
     submission.status = "evaluated";
     await submission.save();
 
     res.status(200).json({
-      message: "Grade saved successfully",
-      grade
+      message: "Graded successfully",
+      grade: {
+        id: grade._id,
+        marks: grade.marks,
+        feedback: grade.feedback
+      }
     });
 
   } catch (err) {
