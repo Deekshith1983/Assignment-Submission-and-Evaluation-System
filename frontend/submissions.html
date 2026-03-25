@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submissions</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f1f5f9;
+    }
+
+    .navbar {
+      background: #0f172a;
+      color: white;
+      padding: 18px 40px;
+      font-size: 22px;
+    }
+
+    .container {
+      width: 85%;
+      margin: auto;
+      padding: 40px 0;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    input, button {
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">Submissions</div>
+
+<div class="container">
+
+  <div class="card">
+    <input type="text" id="studentId" placeholder="Enter Student ID">
+    <button onclick="loadSubmissions()">Fetch</button>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+async function loadSubmissions() {
+  const studentId = document.getElementById("studentId").value;
+
+  if (!studentId) {
+    alert("Enter Student ID");
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:5000/submissions/${studentId}`);
+    const data = await res.json();
+
+    const tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+
+    data.forEach(item => {
+      tableBody.innerHTML += `
+        <tr>
+          <td>${item.title}</td>
+          <td>${new Date(item.createdAt).toLocaleDateString()}</td>
+          <td>${item.status || "Pending"}</td>
+        </tr>
+      `;
+    });
+
+  } catch {
+    alert("Error fetching submissions");
+  }
+}
+</script>
+
+</body>
+</html>
