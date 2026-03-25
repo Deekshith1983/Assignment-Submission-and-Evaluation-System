@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Analytics</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin:0; font-family:'Segoe UI'; background:#f1f5f9; }
+
+    .navbar { background:#0f172a; color:white; padding:15px; }
+
+    .container { padding:20px; }
+
+    input { padding:10px; border-radius:6px; border:1px solid #ccc; }
+
+    button {
+      padding:10px;
+      background:#2563eb;
+      color:white;
+      border:none;
+      border-radius:6px;
+    }
+
+    table {
+      width:100%;
+      margin-top:20px;
+      border-collapse:collapse;
+      background:white;
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    th { background:#e2e8f0; }
+    th,td { padding:10px; border-bottom:1px solid #ddd; }
+
+    footer {
+      text-align:center;
+      padding:15px;
+      background:#0f172a;
+      color:white;
+      margin-top:40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">Student Performance Analytics</div>
+
+<div class="container">
+
+  <input type="text" id="studentId" placeholder="Enter Student ID">
+  <button onclick="fetchAnalytics()">Search</button>
+
+  <table id="resultTable">
+    <thead>
+      <tr>
+        <th>Assignment</th>
+        <th>Marks</th>
+        <th>Feedback</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Average Score: <span id="avg">0</span></h3>
+
+  <canvas id="chart"></canvas>
+
+</div>
+
+<footer>© 2026 Assignment Evaluation System</footer>
+
+<script src="analytics.js"></script>
+
+</body>
+</html>
