@@ -3,34 +3,20 @@
 
 <head>
   <title>Instructor Dashboard</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background: #f1f5f9;
-    }
+    body { margin:0; font-family: 'Segoe UI'; background:#f1f5f9; }
 
     .navbar {
-      background: #0f172a;
-      color: white;
-      padding: 15px 30px;
-      font-size: 20px;
-      font-weight: bold;
+      background:#0f172a;
+      color:white;
+      padding:15px;
+      display:flex;
+      gap:20px;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 20px;
-    }
+    .container { padding:40px; text-align:center; }
 
+<<<<<<< HEAD
     .card {
       background: white;
       padding: 20px;
@@ -46,18 +32,27 @@
       margin-top: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
+=======
+    .box {
+      background:white;
+      padding:30px;
+      border-radius:12px;
+      margin:20px auto;
+      width:60%;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
     }
 
     button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
+      padding:10px 18px;
+      margin:10px;
+      border:none;
+      border-radius:8px;
+      background:#2563eb;
+      color:white;
     }
 
+<<<<<<< HEAD
     table {
       width: 100%;
       border-collapse: collapse;
@@ -87,16 +82,33 @@
 
     canvas {
       margin-top: 20px;
+=======
+    footer {
+      text-align:center;
+      padding:15px;
+      background:#0f172a;
+      color:white;
+      margin-top:40px;
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
     }
   </style>
 </head>
 
 <body>
 
+<<<<<<< HEAD
   <div class="navbar">Instructor Dashboard</div>
+=======
+<div class="navbar">
+  <div>Home</div>
+  <div onclick="location.href='view.html'">View Assignments</div>
+  <div onclick="location.href='analytics.html'">Analytics</div>
+</div>
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
 
   <div class="container">
 
+<<<<<<< HEAD
     <!-- Student Input -->
     <div class="card">
       <h3>Fetch Student Data</h3>
@@ -150,6 +162,22 @@
 
   <script src="evaluate.js"></script>
   <script src="analytics.js"></script>
+=======
+  <div class="box">
+    <h2>Welcome Instructor 👋</h2>
+    <p>Evaluate and track student performance</p>
+    <button onclick="location.href='view.html'">View Assignments</button>
+  </div>
+
+  <div class="box">
+    <button onclick="location.href='view.html'">View Assignments</button>
+    <button onclick="location.href='analytics.html'">View Analytics</button>
+  </div>
+
+</div>
+
+<footer>© 2026 Assignment Evaluation System</footer>
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
 
 </body>
 

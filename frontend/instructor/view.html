@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Assignments</title>
+  <style>
+    body { margin:0; font-family:'Segoe UI'; background:#f1f5f9; }
+    .navbar { background:#0f172a; color:white; padding:15px; }
+    .container { padding:20px; }
+
+    input { padding:10px; border-radius:6px; border:1px solid #ccc; }
+
+    button {
+      padding:10px;
+      background:#2563eb;
+      color:white;
+      border:none;
+      border-radius:6px;
+      margin-left:5px;
+    }
+
+    table {
+      width:100%;
+      margin-top:20px;
+      border-collapse:collapse;
+      background:white;
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    th { background:#e2e8f0; }
+    th,td { padding:12px; border-bottom:1px solid #ddd; text-align:center; }
+
+    footer {
+      text-align:center;
+      padding:15px;
+      background:#0f172a;
+      color:white;
+      margin-top:40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">View Student Assignments</div>
+
+<div class="container">
+
+  <input type="text" id="studentId" placeholder="Enter Student ID">
+  <button onclick="fetchAssignments()">Search</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Assignment</th>
+        <th>File</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+</div>
+
+<footer>© 2026 Assignment Evaluation System</footer>
+
+<script>
+async function fetchAssignments() {
+  const id = document.getElementById("studentId").value;
+
+  const res = await fetch(`http://localhost:3000/api/submissions/${id}`);
+  const result = await res.json(); // ✅ FIX
+  const data = result.data;        // ✅ FIX
+
+  const table = document.getElementById("tableBody");
+  table.innerHTML = "";
+
+  data.forEach(item => {
+    table.innerHTML += `
+      <tr>
+        <td>${item.assignmentTitle}</td>
+        <td><a href="#">View</a></td>
+        <td>
+          <button onclick="goEvaluate('${item._id}')">Evaluate</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function goEvaluate(id){
+  localStorage.setItem("submissionId", id);
+  window.location.href = "evaluate.html";
+}
+</script>
+
+</body>
+</html>

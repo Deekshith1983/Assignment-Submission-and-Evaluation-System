@@ -14,7 +14,7 @@ router.get('/analytics/:studentId', async (req, res) => {
     let total = 0;
     grades.forEach(g => total += g.marks);
 
-    const average = grades.length ? total / grades.length : 0;
+    const average = grades.length ? (total / grades.length) : 0;
 
     const submissions = await Submission.find({ studentId });
 
@@ -25,19 +25,24 @@ router.get('/analytics/:studentId', async (req, res) => {
 
       return {
         assignmentTitle: sub.assignmentTitle,
+        status: sub.status || "pending",
         marks: grade ? grade.marks : null,
         feedback: grade ? grade.feedback : "Not graded"
       };
     });
 
-    res.json({
+    res.status(200).json({
       studentId,
+      totalAssignments: submissions.length,
+      gradedCount: grades.length,
       average,
       results
     });
 
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      error: err.message
+    });
   }
 });
 
