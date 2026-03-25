@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <title>Instructor Dashboard</title>
   <style>
@@ -15,6 +16,23 @@
 
     .container { padding:40px; text-align:center; }
 
+<<<<<<< HEAD
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+=======
     .box {
       background:white;
       padding:30px;
@@ -22,6 +40,7 @@
       margin:20px auto;
       width:60%;
       box-shadow:0 4px 12px rgba(0,0,0,0.08);
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
     }
 
     button {
@@ -33,26 +52,117 @@
       color:white;
     }
 
+<<<<<<< HEAD
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .analytics-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      flex: 1;
+      background: #eff6ff;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    canvas {
+      margin-top: 20px;
+=======
     footer {
       text-align:center;
       padding:15px;
       background:#0f172a;
       color:white;
       margin-top:40px;
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
     }
   </style>
 </head>
 
 <body>
 
+<<<<<<< HEAD
+  <div class="navbar">Instructor Dashboard</div>
+=======
 <div class="navbar">
   <div>Home</div>
   <div onclick="location.href='view.html'">View Assignments</div>
   <div onclick="location.href='analytics.html'">Analytics</div>
 </div>
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
 
-<div class="container">
+  <div class="container">
 
+<<<<<<< HEAD
+    <!-- Student Input -->
+    <div class="card">
+      <h3>Fetch Student Data</h3>
+      <input type="text" id="studentId" placeholder="Enter Student ID">
+      <button onclick="loadAllData()">Fetch Data</button>
+    </div>
+
+    <!-- Assignments -->
+    <div class="card">
+      <h3>Assignments</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Evaluation -->
+    <div class="card">
+      <h3>Evaluate Assignment</h3>
+      <input type="number" id="marks" placeholder="Marks (0-100)">
+      <textarea id="feedback" placeholder="Feedback"></textarea>
+      <button onclick="submitEvaluation()">Submit</button>
+    </div>
+
+    <!-- Analytics -->
+    <div class="card">
+      <h3>Analytics</h3>
+
+      <div class="analytics-grid">
+        <div class="stat-box">
+          <h4>Average Score</h4>
+          <p id="avgScore">0</p>
+        </div>
+
+        <div class="stat-box">
+          <h4>Total Assignments</h4>
+          <p id="totalAssign">0</p>
+        </div>
+      </div>
+
+      <canvas id="chart"></canvas>
+    </div>
+
+  </div>
+
+  <script src="evaluate.js"></script>
+  <script src="analytics.js"></script>
+=======
   <div class="box">
     <h2>Welcome Instructor 👋</h2>
     <p>Evaluate and track student performance</p>
@@ -67,6 +177,8 @@
 </div>
 
 <footer>© 2026 Assignment Evaluation System</footer>
+>>>>>>> faf9f1591a1b956a73b7d5d56e95f81c665fdef1
 
 </body>
+
 </html>
