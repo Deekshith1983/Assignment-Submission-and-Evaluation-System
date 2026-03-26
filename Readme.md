@@ -88,53 +88,53 @@ Landing Page
 ```
 project-root/
 ├── frontend/
-│   ├── index.html                 ✅ Landing page
+│   ├── index.html                
 │   ├── css/
-│   │   └── styles.css             ✅ Unified global styles
+│   │   └── styles.css            
 │   ├── student/
-│   │   ├── dashboard.html         ✅ Student home
-│   │   ├── submit.html            ✅ Submit assignment
-│   │   ├── submit.js              ✅ Form handling + API integration
-│   │   ├── submissions.html       ✅ View all submissions
-│   │   ├── submissions.js         ✅ Fetch submissions logic
-│   │   ├── results.html           ✅ Results & analytics
-│   │   └── results.js             ✅ Chart.js performance graph
+│   │   ├── dashboard.html        
+│   │   ├── submit.html           
+│   │   ├── submit.js             
+│   │   ├── submissions.html     
+│   │   ├── submissions.js       
+│   │   ├── results.html          
+│   │   └── results.js          
 │   │
 │   └── instructor/
-│       ├── dashboard.html         ✅ Instructor home
-│       ├── view.html              ✅ View assignments list
-│       ├── view.js                ✅ Search & fetch logic
-│       ├── evaluate.html          ✅ Evaluation form
-│       ├── evaluate.js            ✅ Submit evaluation logic
-│       ├── analytics.html         ✅ Student analytics
-│       └── analytics.js           ✅ Chart.js trend analysis
+│       ├── dashboard.html         
+│       ├── view.html              
+│       ├── view.js                
+│       ├── evaluate.html          
+│       ├── evaluate.js            
+│       ├── analytics.html         
+│       └── analytics.js           
 │
 ├── backend/
-│   ├── server.js                  ✅ Express app setup
-│   ├── package.json               ✅ All dependencies included
-│   ├── .env                        ✅ MongoDB URI + config
+│   ├── server.js                 
+│   ├── package.json              
+│   ├── .env                      
 │   │
 │   ├── config/
-│   │   └── db.js                  ✅ MongoDB connection
+│   │   └── db.js                 
 │   │
 │   ├── models/
-│   │   ├── Submission.js          ✅ Student submission schema
-│   │   ├── Grade.js               ✅ Marks & feedback schema
-│   │   └── Assignment.js          ✅ Assignment metadata
+│   │   ├── Submission.js         
+│   │   ├── Grade.js              
+│   │   └── Assignment.js         
 │   │
 │   ├── routes/
-│   │   ├── submissions.js         ✅ POST/GET submissions
-│   │   ├── grades.js              ✅ POST grades (evaluation)
-│   │   └── analytics.js           ✅ GET analytics per student
+│   │   ├── submissions.js         
+│   │   ├── grades.js              
+│   │   └── analytics.js           
 │   │
 │   ├── middleware/
-│   │   └── upload.js              ✅ Multer file upload config
+│   │   └── upload.js              
 │   │
-│   └── uploads/                   📁 File storage (auto-created)
+│   └── uploads/                   
 │
-├── .gitignore                      ✅ Excludes .env, uploads/, node_modules/
-├── Readme.md                       📖 Full documentation
-└── .git/                           Git repository
+├── .gitignore                     
+├── Readme.md                       
+└── .git/                        
 
 ```
 
@@ -145,7 +145,7 @@ project-root/
 ### Prerequisites
 - **Node.js** (v14 or higher)
 - **MongoDB** (MongoDB Atlas - Cloud recommended)
-- **npm** or **yarn**
+- **npm** 
 - **Git**
 
 ### Installation Steps
@@ -162,26 +162,13 @@ cd backend
 npm install
 ```
 
-#### 3. Configure Environment
-Create `.env` file in `backend/` folder:
-```
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/assignmentDB
-NODE_ENV=development
-PORT=3000
-```
-
-**To get MongoDB URI:**
-- Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-- Create a cluster
-- Get connection string: `mongodb+srv://user:pass@cluster.net/dbname`
-
-#### 4. Start Backend Server
+#### 3. Start Backend Server
 ```bash
 npm start
 ```
 **Output:** `🚀 Server running on http://localhost:3000`
 
-#### 5. Access Application
+#### 4. Access Application
 Open browser and navigate to:
 ```
 http://localhost:3000
@@ -208,183 +195,6 @@ http://localhost:3000
 | **Track Progress** | View which assignments are evaluated/pending |
 | **Analytics** | Per-student performance metrics |
 | **Trends** | Visual performance graphs over assignments |
-
----
-
-## 🔧 API Endpoints
-
-### Base URL: `http://localhost:3000/api`
-
-### **SUBMISSION ENDPOINTS**
-
-#### POST - Submit Assignment
-```
-POST /submit
-Content-Type: multipart/form-data
-
-Fields:
-- name (text)
-- studentId (text, required)
-- email (email)
-- assignmentTitle (text)
-- file (file, PDF/DOCX max 10MB)
-
-Success Response (201):
-{
-  "message": "Assignment submitted successfully",
-  "data": { submission object }
-}
-```
-
-#### GET - Fetch Submissions
-```
-GET /submissions/:studentId
-
-Success Response (200):
-{
-  "count": 3,
-  "data": [ submission objects ]
-}
-```
-
-### **GRADE/EVALUATION ENDPOINTS**
-
-#### POST - Submit Evaluation
-```
-POST /grade/:submissionId
-Content-Type: application/json
-
-Body:
-{
-  "marks": 85,
-  "feedback": "Great work! Keep improving..."
-}
-
-Success Response:
-{
-  "message": "Grade saved successfully",
-  "data": { grade object }
-}
-```
-
-#### GET - Get Student Grades
-```
-GET /grade/:studentId
-
-Success Response (200):
-[
-  {
-    "submissionId": "...",
-    "marks": 85,
-    "feedback": "...",
-    "evaluatedAt": "2026-03-26T..."
-  }
-]
-```
-
-### **ANALYTICS ENDPOINTS**
-
-#### GET - Student Analytics
-```
-GET /analytics/:studentId
-
-Success Response (200):
-{
-  "studentId": "STU001",
-  "totalAssignments": 3,
-  "gradedCount": 2,
-  "average": 82.5,
-  "results": [
-    {
-      "assignmentTitle": "Assignment 1",
-      "status": "evaluated",
-      "marks": 85,
-      "feedback": "Good work"
-    }
-  ]
-}
-```
-
----
-
-## 🎨 Design & UI Features
-
-### Color Scheme
-- **Navbar**: Dark Navy (`#0f172a`)
-- **Background**: Light Gray (`#f1f5f9`)
-- **Primary**: Blue (`#2563eb`)
-- **Accents**: Green (success), Red (error), Yellow (warning)
-
-### Layout Components
-- **Responsive Grid**: Works on desktop, tablet, mobile
-- **Split Layout**: 50-50 form/preview on submission & evaluation
-- **Status Badges**: Color-coded (green=evaluated, yellow=pending)
-- **Alert Messages**: Success/Error/Info notifications
-- **Stats Boxes**: Key metrics visualization
-- **Charts**: Chart.js line graphs for trends
-
----
-
-## ✅ Validation & Error Handling
-
-### File Upload Validation
-```javascript
-✓ File type: Only PDF/DOCX allowed
-✓ File size: Maximum 10MB
-✓ Required: Must have a file selected
-```
-
-### Form Validation
-```javascript
-✓ All required fields must be filled
-✓ Valid email format
-✓ Student ID must be provided
-✓ Marks must be 0-100 for evaluation
-```
-
-### Error Messages
-- Clear, user-friendly error notifications
-- Network error handling
-- API response error messages
-- Validation feedback
-
----
-
-## 🐛 Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| Server won't start | Check if port 3000 is in use; change PORT in .env |
-| MongoDB connection fails | Verify MONGODB_URI in .env; check Atlas IP whitelist |
-| File upload not working | Ensure `/backend/uploads` directory exists |
-| Cannot access localhost:3000 | Server may not have started; check console for errors |
-| File size error | Files must be < 10MB; only PDF/DOCX allowed |
-
----
-
-## 📊 Project Statistics
-
-- **Frontend Files**: 14 HTML/CSS/JS files
-- **Backend Routes**: 3 route modules (submissions, grades, analytics)
-- **Database Collections**: 3 (Submissions, Grades, Assignments)
-- **API Endpoints**: 7+ fully functional endpoints
-- **Responsive Breakpoints**: Mobile, tablet, desktop
-
----
-
-## 📧 Support
-
-For issues:
-1. Check the Troubleshooting section
-2. Review API endpoint documentation
-3. Check browser console for errors
-4. Open an issue in the repository
-
----
-
-## 📄 License
-
-This project is available under the **MIT License**.
 
 ---
 
