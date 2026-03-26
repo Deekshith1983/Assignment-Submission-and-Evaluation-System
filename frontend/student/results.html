@@ -3,75 +3,136 @@
 <head>
   <title>Results</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Poppins';
       margin: 0;
       background: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .navbar {
       background: #0f172a;
+      padding: 15px 40px;
+    }
+
+    .navbar a {
       color: white;
-      padding: 18px 40px;
-      font-size: 22px;
+      margin-right: 25px;
+      text-decoration: none;
     }
 
     .container {
-      width: 85%;
+      width: 80%;
       margin: auto;
       padding: 40px 0;
+      flex: 1;
     }
 
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    input, button {
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 10px;
+    /* 🔥 SEARCH BAR */
+    .search-box {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .search-box input {
+      width: 400px;
+      padding: 14px;
+      border-radius: 6px;
       border: 1px solid #ccc;
     }
 
-    button {
+    .search-box button {
+      padding: 14px 20px;
       background: #2563eb;
       color: white;
-      cursor: pointer;
+      border: none;
+      border-radius: 6px;
     }
 
+    /* 🔥 SECTION STYLE (LIKE LAYOUT BOXES) */
+    .section {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .section h3 {
+      margin: 0;
+      text-align: center;
+    }
+
+    /* 🔥 TABLE */
     table {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 15px;
       border-collapse: collapse;
+    }
+
+    th {
+      background: #e2e8f0;
     }
 
     th, td {
       padding: 12px;
-      border-bottom: 1px solid #ddd;
       text-align: center;
+    }
+
+    .no-data {
+      padding: 20px;
+      color: gray;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
     }
   </style>
 </head>
 
 <body>
 
-<div class="navbar">Results</div>
+<!-- NAVBAR -->
+<div class="navbar">
+  <a href="dashboard.html">Home</a>
+  <a href="submit.html">Submit</a>
+  <a href="submissions.html">Submissions</a>
+  <a href="results.html">Results</a>
+</div>
 
 <div class="container">
 
-  <div class="card">
-    <input type="text" id="studentId" placeholder="Enter Student ID">
-    <button onclick="loadResults()">Fetch Results</button>
+  <!-- HERO -->
+  <h2>Results & Performance</h2>
+
+  <!-- SEARCH -->
+  <div class="search-box">
+    <input id="studentId" placeholder="Enter Student ID">
+    <button onclick="load()">Search</button>
   </div>
 
-  <div class="card">
+  <!-- TOP SUMMARY -->
+  <div class="section">
+    <h3>Average Score: <span id="avg">0</span></h3>
+  </div>
+
+  <!-- RESULTS TABLE -->
+  <div class="section">
+    <h3>Results Table</h3>
+
     <table>
       <thead>
         <tr>
@@ -80,52 +141,79 @@
           <th>Feedback</th>
         </tr>
       </thead>
-      <tbody id="resultBody"></tbody>
+
+      <tbody id="body">
+        <tr>
+          <td colspan="3" class="no-data">No results found</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
-  <div class="card">
-    <h3>Average Score: <span id="avgScore">0</span></h3>
+  <!-- CHART SECTION -->
+  <div class="section">
+    <h3>Marks Trend</h3>
+    <canvas id="chart" style="max-height:300px;"></canvas>
   </div>
 
 </div>
 
-<script>
-async function loadResults() {
-  const studentId = document.getElementById("studentId").value;
+<footer>Results Page</footer>
 
-  if (!studentId) {
+<script>
+let chart;
+
+function load() {
+  const id = document.getElementById("studentId").value;
+
+  if (!id) {
     alert("Enter Student ID");
     return;
   }
 
-  try {
-    const res = await fetch(`http://localhost:5000/analytics/${studentId}`);
-    const data = await res.json();
+  // sample data (replace with backend later)
+  const data = [
+    { title: "DBMS", marks: 85, feedback: "Good" },
+    { title: "OS", marks: 78, feedback: "Improve" }
+  ];
 
-    const resultBody = document.getElementById("resultBody");
-    resultBody.innerHTML = "";
+  let total = 0;
+  const body = document.getElementById("body");
 
-    let total = 0;
+  body.innerHTML = "";
 
-    data.forEach(item => {
-      total += item.marks || 0;
+  const labels = [];
+  const marks = [];
 
-      resultBody.innerHTML += `
-        <tr>
-          <td>${item.title}</td>
-          <td>${item.marks || "-"}</td>
-          <td>${item.feedback || "-"}</td>
-        </tr>
-      `;
-    });
+  data.forEach(d => {
+    total += d.marks;
 
-    const avg = data.length ? (total / data.length).toFixed(2) : 0;
-    document.getElementById("avgScore").innerText = avg;
+    labels.push(d.title);
+    marks.push(d.marks);
 
-  } catch {
-    alert("Error fetching results");
-  }
+    body.innerHTML += `
+      <tr>
+        <td>${d.title}</td>
+        <td>${d.marks}</td>
+        <td>${d.feedback}</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("avg").innerText = (total / data.length).toFixed(2);
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(document.getElementById("chart"), {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Marks",
+        data: marks
+      }]
+    }
+  });
 }
 </script>
 
