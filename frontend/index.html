@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Assignment Submission and Evaluation System - A seamless platform for students and instructors.">
+    <title>Assignment Submission & Evaluation System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-title">📚 Assignment Portal</div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Assignment Submission & Evaluation System</h1>
+            <p>Submit, Evaluate, and Track Assignment Performance</p>
+            <p class="text-base text-gray mt-20">A seamless platform for students to submit
+                assignments and instructors to evaluate them with marks and feedback.</p>
+        </div>
+
+        <div class="actions">
+            <div class="action-card" onclick="goToStudent()">
+                <div class="text-4xl">🧑‍🎓</div>
+                <h2>I am Student</h2>
+                <p>Submit your assignments, view submissions, and track your performance</p>
+                <button class="btn">Enter Dashboard</button>
+            </div>
+
+            <div class="action-card" onclick="goToInstructor()">
+                <div class="text-4xl">👨‍🏫</div>
+                <h2>I am Instructor</h2>
+                <p>Evaluate student work, provide feedback, and view analytics</p>
+                <button class="btn">Enter Dashboard</button>
+            </div>
+        </div>
+
+        <div class="card mt-40">
+            <h3 class="mb-15">✨ Key Features</h3>
+            <div class="grid-auto-fit">
+                <div>
+                    <strong>📤 Easy Submission</strong>
+                    <p class="desc-text-gray">Students can submit assignments with
+                        just Student ID and email</p>
+                </div>
+                <div>
+                    <strong>✏️ Evaluate Work</strong>
+                    <p class="desc-text-gray">Instructors can provide marks and
+                        feedback instantly</p>
+                </div>
+                <div>
+                    <strong>📊 Track Performance</strong>
+                    <p class="desc-text-gray">View analytics, average scores, and
+                        performance trends</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-20">
+            <h3 class="mb-15">🎯 How It Works</h3>
+            <ol class="text-base text-gray line-height-2">
+                <li><strong>Student</strong> enters their Student ID once</li>
+                <li><strong>Student</strong> submits assignment with file (PDF/DOCX)</li>
+                <li><strong>Instructor</strong> reviews submissions</li>
+                <li><strong>Instructor</strong> provides marks and feedback</li>
+                <li><strong>Student</strong> views results and analytics</li>
+            </ol>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Assignment Submission & Evaluation System | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function goToStudent() {
+            window.location.href = 'student/dashboard.html';
+        }
+
+        function goToInstructor() {
+            window.location.href = 'instructor/dashboard.html';
+        }
+    </script>
+
+</body>
+
+</html>

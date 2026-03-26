@@ -1,95 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Submit</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
-  <style>
-    body { font-family: 'Poppins'; margin: 0; background: #f1f5f9; }
-
-    .navbar { background: #0f172a; padding: 15px 40px; }
-    .navbar a { color: white; margin-right: 25px; text-decoration: none; }
-
-    .container { width: 85%; margin: auto; padding: 40px 0; }
-
-    .hero {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .flex {
-      display: flex;
-      gap: 20px;
-    }
-
-    .card {
-      width: 50%;
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-top: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 14px;
-      width: 100%;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-    }
-
-    footer { text-align: center; padding: 20px; margin-top: 30px; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Submit Assignment - Upload your assignment file securely.">
+  <title>Submit Assignment</title>
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
 
-<div class="navbar">
-  <a href="dashboard.html">Home</a>
-  <a href="submit.html">Submit</a>
-  <a href="submissions.html">Submissions</a>
-  <a href="results.html">Results</a>
-</div>
-
-<div class="container">
-
-  <div class="hero">
-    <h2>Submit Your Assignment</h2>
+  <div class="navbar">
+    <div class="navbar-title">📚 Student Portal</div>
+    <div>
+      <a href="dashboard.html">Home</a>
+      <a href="submit.html">Submit</a>
+      <a href="submissions.html">Submissions</a>
+      <a href="results.html">Results</a>
+    </div>
   </div>
 
-  <div class="flex">
+  <div class="container">
 
-    <div class="card">
-      <form id="form">
-        <input id="name" placeholder="Name" required>
-        <input id="studentId" placeholder="Student ID" required>
-        <input id="email" placeholder="Email" required>
-        <input id="title" placeholder="Assignment Title" required>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="hero">
+      <h1>Submit Your Assignment</h1>
+      <p>Upload your assignment with file (PDF/DOCX)</p>
     </div>
 
-    <div class="card">
-      <h3>Upload File</h3>
-      <input type="file" id="file">
+    <div id="message"></div>
+
+    <div class="split-container">
+
+      <div class="split-left">
+        <div class="split-title">📝 Assignment Details</div>
+
+        <form id="submitForm">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentId">Student ID *</label>
+            <input type="text" id="studentId" placeholder="Enter your Student ID" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" placeholder="Enter your email address" required>
+          </div>
+
+          <div class="form-group">
+            <label for="title">Assignment Title *</label>
+            <input type="text" id="title" placeholder="Enter assignment title" required>
+          </div>
+
+          <button type="submit" class="btn btn-full">Submit Assignment</button>
+        </form>
+      </div>
+
+      <div class="split-right">
+        <div class="split-title">📤 Upload File</div>
+
+        <div class="file-upload-box" id="fileUploadBox" onclick="document.getElementById('fileInput').click()">
+          <div class="text-4xl mb-15">📎</div>
+          <p class="font-weight-500 mb-10">Click to upload or drag & drop</p>
+          <p class="text-sm text-gray">PDF or DOCX (Max 10MB)</p>
+          <input type="file" id="fileInput" accept=".pdf,.docx" class="hidden" title="Choose file to upload"
+            aria-label="File upload for assignment">
+        </div>
+
+        <div id="fileInfo" class="mt-20 info-box-hidden">
+          <p class="label-text"><strong>Selected File:</strong></p>
+          <p id="fileName" class="desc-text"></p>
+          <p id="fileSize" class="desc-text-gray"></p>
+        </div>
+      </div>
+
     </div>
 
   </div>
 
-</div>
+  <footer>
+    <p>&copy; 2026 Assignment System</p>
+  </footer>
 
-<footer>Submit Page</footer>
+  <script src="submit.js"></script>
 
 </body>
+
 </html>

@@ -1,76 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Analytics</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Analytics - Track performance and view student trends.">
+  <title>Student Analytics</title>
+  <link rel="stylesheet" href="../css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { margin:0; font-family:'Segoe UI'; background:#f1f5f9; }
-
-    .navbar { background:#0f172a; color:white; padding:15px; }
-
-    .container { padding:20px; }
-
-    input { padding:10px; border-radius:6px; border:1px solid #ccc; }
-
-    button {
-      padding:10px;
-      background:#2563eb;
-      color:white;
-      border:none;
-      border-radius:6px;
-    }
-
-    table {
-      width:100%;
-      margin-top:20px;
-      border-collapse:collapse;
-      background:white;
-      border-radius:10px;
-      overflow:hidden;
-    }
-
-    th { background:#e2e8f0; }
-    th,td { padding:10px; border-bottom:1px solid #ddd; }
-
-    footer {
-      text-align:center;
-      padding:15px;
-      background:#0f172a;
-      color:white;
-      margin-top:40px;
-    }
-  </style>
 </head>
 
 <body>
 
-<div class="navbar">Student Performance Analytics</div>
+  <div class="navbar">
+    <div class="navbar-title">👨‍🏫 Instructor Portal</div>
+    <div>
+      <a href="dashboard.html">Home</a>
+      <a href="view.html">View Assignments</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+  </div>
 
-<div class="container">
+  <div class="container">
 
-  <input type="text" id="studentId" placeholder="Enter Student ID">
-  <button onclick="fetchAnalytics()">Search</button>
+    <div class="hero">
+      <h1>Student Performance Analytics</h1>
+      <p>Track and analyze individual student performance</p>
+    </div>
 
-  <table id="resultTable">
-    <thead>
-      <tr>
-        <th>Assignment</th>
-        <th>Marks</th>
-        <th>Feedback</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+    <div id="message"></div>
 
-  <h3>Average Score: <span id="avg">0</span></h3>
+    <div class="white-card text-center">
+      <input type="text" id="studentId" placeholder="Enter Student ID" class="max-w-300 inline-block">
+      <button onclick="fetchAnalytics()" class="btn ml-10">Search</button>
+    </div>
 
-  <canvas id="chart"></canvas>
+    <div class="grid-3">
+      <div class="stats-box">
+        <div class="stats-label">Total Assignments</div>
+        <div class="stats-number" id="totalCount">0</div>
+      </div>
+      <div class="stats-box">
+        <div class="stats-label">Evaluated</div>
+        <div class="stats-number" id="evaluatedCount">0</div>
+      </div>
+      <div class="stats-box">
+        <div class="stats-label">Average Score</div>
+        <div class="stats-number" id="avg">0</div>
+      </div>
+    </div>
 
-</div>
+    <div class="white-card">
+      <h3 class="mb-20">📊 Results Table</h3>
+      <table id="resultTable">
+        <thead>
+          <tr>
+            <th>Assignment</th>
+            <th>Marks</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3" class="text-center p-30 text-gray">Enter Student ID and search to
+              view analytics</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<footer>© 2026 Assignment Evaluation System</footer>
+    <div class="white-card">
+      <h3 class="mb-20">📈 Performance Trend Graph</h3>
+      <canvas id="chart" class="max-h-300"></canvas>
+    </div>
 
-<script src="analytics.js"></script>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Assignment System</p>
+  </footer>
+
+  <script src="analytics.js"></script>
 
 </body>
+
 </html>

@@ -1,77 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Evaluate Assignment - Provide marks and feedback to students.">
   <title>Evaluate Assignment</title>
-  <style>
-    body { margin:0; font-family:'Segoe UI'; background:#f1f5f9; }
-
-    .navbar { background:#0f172a; color:white; padding:15px; }
-
-    .container { display:flex; gap:20px; padding:20px; }
-
-    .left, .right {
-      width:50%;
-      background:white;
-      padding:20px;
-      border-radius:12px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    input, textarea {
-      width:100%;
-      padding:10px;
-      margin-top:10px;
-      border-radius:6px;
-      border:1px solid #ccc;
-    }
-
-    button {
-      margin-top:10px;
-      padding:10px;
-      background:#2563eb;
-      color:white;
-      border:none;
-      border-radius:6px;
-    }
-
-    footer {
-      text-align:center;
-      padding:15px;
-      background:#0f172a;
-      color:white;
-      margin-top:40px;
-    }
-  </style>
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
 
-<div class="navbar">Evaluate Assignment</div>
-
-<div class="container">
-
-  <div class="left">
-    <h3>Student Details</h3>
-    <p>Name: Student</p>
-    <p>Student ID: ---</p>
-    <p>Assignment Title: ---</p>
-
-    <h3>Evaluation</h3>
-    <input type="number" id="marks" placeholder="Marks">
-    <textarea id="feedback" placeholder="Feedback"></textarea>
-    <button onclick="submitEvaluation()">Submit Evaluation</button>
+  <div class="navbar">
+    <div class="navbar-title">👨‍🏫 Instructor Portal</div>
+    <div>
+      <a href="dashboard.html">Home</a>
+      <a href="view.html">View Assignments</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
   </div>
 
-  <div class="right">
-    <h3>File Preview</h3>
-    <p>Download/View Assignment</p>
+  <div class="container">
+
+    <div class="hero">
+      <h1>Evaluate Assignment</h1>
+      <p>Review student work and provide marks and feedback</p>
+    </div>
+
+    <div id="message"></div>
+
+    <div class="split-container">
+
+      <div class="split-left">
+        <div class="split-title">📋 Assignment Details</div>
+
+        <div class="info-box">
+          <p class="label-text"><strong>Student Name:</strong></p>
+          <p id="studentName" class="value-text"></p>
+
+          <p class="m-15"><strong class="text-gray text-sm">Student ID:</strong></p>
+          <p id="studentId" class="value-text"></p>
+
+          <p class="m-15"><strong class="text-gray text-sm">Assignment Title:</strong></p>
+          <p id="assignmentTitle" class="value-text"></p>
+
+          <p class="m-15"><strong class="text-gray text-sm">Upload Date:</strong></p>
+          <p id="uploadDate" class="value-text"></p>
+
+          <p class="m-15"><strong class="text-gray text-sm">File:</strong></p>
+          <a id="fileLink" target="_blank" class="btn btn-small">Download File</a>
+        </div>
+      </div>
+
+      <div class="split-right">
+        <div class="split-title">✍️ Provide Evaluation</div>
+
+        <form id="evaluateForm">
+          <div class="form-group">
+            <label for="marks">Marks (0-100) *</label>
+            <input type="number" id="marks" min="0" max="100" placeholder="Enter marks" required>
+          </div>
+
+          <div class="form-group">
+            <label for="feedback">Feedback *</label>
+            <textarea id="feedback" placeholder="Provide feedback to the student" required class="min-h-150"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-full">Submit Evaluation</button>
+        </form>
+      </div>
+
+    </div>
+
   </div>
 
-</div>
+  <footer>
+    <p>&copy; 2026 Assignment System</p>
+  </footer>
 
-<footer>© 2026 Assignment Evaluation System</footer>
-
-<script src="evaluate.js"></script>
+  <script src="evaluate.js"></script>
 
 </body>
+
 </html>

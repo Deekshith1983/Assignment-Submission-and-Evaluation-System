@@ -1,8 +1,17 @@
 {
+  "name": "assignment-submission-evaluation-system",
+  "version": "1.0.0",
+  "description": "Platform where students can submit assignments and instructors can evaluate them",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "mongoose": "^9.3.2"
+    "mongoose": "^9.3.2",
+    "multer": "^1.4.5-lts.1"
   }
 }
