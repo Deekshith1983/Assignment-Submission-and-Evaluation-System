@@ -98,7 +98,7 @@ document.getElementById('submitForm').addEventListener('submit', async (e) => {
 
       // Redirect after 2 seconds
       setTimeout(() => {
-        window.location.href = 'submissions.html';
+        window.location.href = 'dashboard.html';
       }, 2000);
     } else {
       showMessage(`Error: ${data.message}`, 'error');
