@@ -40,21 +40,6 @@ A **full-stack web platform** where students can submit assignments and instruct
 
 ## 🏗️ Project Architecture
 
-### Overall Structure
-```
-Landing Page
-    ↓
-┌───────────────────────┬─────────────────────┐
-│   STUDENT DASHBOARD   │  INSTRUCTOR DASHBOARD│
-├───────────────────────┼─────────────────────┤
-│ • Submit Assignment   │ • View Assignments  │
-│ • View Submissions    │ • Evaluate Work     │
-│ • View Results        │ • Analytics         │
-└───────────────────────┴─────────────────────┘
-         ↓                      ↓
-    [MongoDB Atlas]     [Express.js API]
-```
-
 ### 1. Landing Page
 - Hero section with project introduction
 - Two navigation buttons (Student/Instructor)
@@ -152,7 +137,7 @@ project-root/
 
 #### 1. Clone Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Deekshith1983/Assignment-Submission-and-Evaluation-System.git
 cd Assignment_Submission_and_Evaluation_System
 ```
 
